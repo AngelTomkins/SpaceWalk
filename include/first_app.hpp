@@ -1,6 +1,5 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_timer.h>
 
 #include "eng_game_loop.hpp"
 #include "eng_window.hpp"
