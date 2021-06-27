@@ -3,9 +3,6 @@
 //headers
 #include "eng_input.hpp"
 
-//std
-#include <iostream>
-
 namespace eng {
 
   char EngInput::inputCheck(SDL_Event event) {
@@ -32,7 +29,6 @@ namespace eng {
       pressed = '-';
       break;
     }
-    std::cout << pressed << std::endl;
     return pressed;
   }
 } // namespace eng
