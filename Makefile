@@ -6,3 +6,6 @@ $(TARGET): src/*.cpp src/*.hpp
 		
 test: ./a.out
 	./a.out
+
+clean: ./a.out
+	rm ./a.out
