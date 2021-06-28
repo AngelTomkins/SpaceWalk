@@ -3,18 +3,23 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include "eng_entity.hpp"
+#include "constants.hpp"
+
 // std
 #include <string>
 
 namespace eng {
 class EngWindow {
 public:
-  EngWindow(int w, int h, std::string name);
+  void init(int w, int h, std::string name);
   SDL_Texture* loadTexture(const char* filePath);
+
+  int getRefershRate();
 
   void closeWindow();
   void clear();
-  void render(SDL_Texture* tex);
+  void render(EngEntity& p_entity);
   void display();
 
 private:
@@ -23,6 +28,7 @@ private:
 
   int WIDTH;
   int HEIGHT;
+
 
   std::string windowName;
 
