@@ -21,8 +21,10 @@ void FirstApp::run() {
   if (!(IMG_Init(IMG_INIT_PNG)))
     std::cout << "Error Initiating IMGs" << SDL_GetError() << std::endl;
 
-  SDL_Texture *playerTex = engWindow.loadTexture("gfx/player.png");
+  SDL_Texture *playerTex = engWindow.loadTexture("gfx/Player_Idle.png");
+  SDL_Texture *bgTex = engWindow.loadTexture("gfx/bg.png");
 
+  EngEntity background = {Vector2f(0,0), bgTex};
   EngPlayer player = {Vector2f(0,0), playerTex};
 
   bool gameRunning = true;
@@ -31,7 +33,6 @@ void FirstApp::run() {
   float accumulator = 0.0f;
   float currentTime = utils::hireTimeInSeconds();
 
-  char pressed = ' ';
 
   while (gameRunning) {
     SDL_Event event;
@@ -56,7 +57,7 @@ void FirstApp::run() {
           break;
 
         case SDL_KEYDOWN:
-          pressed = engInput.inputCheck(event);
+          engInput.inputCheck(event);
           player.move(engInput.getDirection());
           break;
         }
@@ -70,6 +71,7 @@ void FirstApp::run() {
     // for (EngEntity &e : entities) {
     //   engWindow.render(e);
     // }
+    engWindow.render(background);
     engWindow.render(player);
 
     engWindow.display();

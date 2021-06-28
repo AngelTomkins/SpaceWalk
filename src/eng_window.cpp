@@ -78,5 +78,4 @@ void EngWindow::display()
 {
     SDL_RenderPresent(renderer);
 }
-
 } // namespace eng

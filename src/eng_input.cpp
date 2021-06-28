@@ -2,41 +2,72 @@
 
 #include "eng_input.hpp"
 
+#include <SDL2/SDL_keycode.h>
 #include <iostream>
 
 namespace eng {
 
-  char EngInput::inputCheck(SDL_Event event) {
-    char pressed;
+char EngInput::inputCheck(SDL_Event event) {
+  char pressed;
 
-    direction = {0,0};
-
-    switch (event.key.keysym.scancode) {
-    case SDL_SCANCODE_W:
-    case SDL_SCANCODE_UP:
-      direction = {direction.x, direction.y - 1};
+  if (event.type == SDL_KEYDOWN) {
+    switch (event.key.keysym.sym) {
+    case SDLK_UP:
+    case SDLK_w:
+      direction = {direction.x, -1};
       pressed = 'W';
       break;
-    case SDL_SCANCODE_S:
-    case SDL_SCANCODE_DOWN:
-      direction = {direction.x, direction.y + 1};
+    case SDLK_DOWN:
+    case SDLK_s:
+      direction = {direction.x, 1};
       pressed = 'S';
       break;
-    case SDL_SCANCODE_A:
-    case SDL_SCANCODE_LEFT:
-      direction = {direction.x - 1, direction.y};
+    case SDLK_LEFT:
+    case SDLK_a:
+      direction = {-1, direction.y};
       pressed = 'A';
       break;
-    case SDL_SCANCODE_D:
-    case SDL_SCANCODE_RIGHT:
-      direction = {direction.x + 1, direction.y};
+    case SDLK_RIGHT:
+    case SDLK_d:
+      direction = {1, direction.y};
       pressed = 'D';
       break;
     default:
-      direction = {0,0};
+      direction = {0, 0};
       pressed = '-';
       break;
     }
+
+    if (event.type == SDL_KEYUP) {
+      switch (event.key.keysym.sym) {
+      case SDLK_UP:
+      case SDLK_w:
+        direction = {direction.x, 0};
+        pressed = 'W';
+        break;
+      case SDLK_DOWN:
+      case SDLK_s:
+        direction = {direction.x, 0};
+        pressed = 'S';
+        break;
+      case SDLK_LEFT:
+      case SDLK_a:
+        direction = {0, direction.y};
+        pressed = 'A';
+        break;
+      case SDLK_RIGHT:
+      case SDLK_d:
+        direction = {0, direction.y};
+        pressed = 'D';
+        break;
+      default:
+        direction = {0, 0};
+        pressed = '-';
+        break;
+      }
+    }
+  }
+
     return pressed;
   }
 } // namespace eng

@@ -16,24 +16,24 @@ void EngPlayer::move(Vector2f &direction) {
 void EngPlayer::update() {
 
   Vector2f newPos;
-  newPos.x = pos.x + vel.x * constants::accel;
-  newPos.y = pos.y + vel.y * constants::accel;
+  newPos.x = pos.x + (vel.x * constants::accel);
+  newPos.y = pos.y + (vel.y * constants::accel);
 
   if (newPos.x <= 0){
     vel.x = -vel.x * constants::friction;
     newPos.x = 0;
-  } else if (newPos.x >= constants::startWidth - this->currentFrame.w){
+  } else if (newPos.x >= constants::startWidth / constants::scale  - this->currentFrame.w){
     vel.x = -vel.x * constants::friction;
-    newPos.x = constants::startWidth - this->currentFrame.w;
+    newPos.x = constants::startWidth / constants::scale  - this->currentFrame.w;
 
   }
 
   if (newPos.y <= 0){
     vel.y = -vel.y * constants::friction;
     newPos.y = 0;
-  } else if (newPos.y >= constants::startHeight - this->currentFrame.h){
+  } else if (newPos.y >= constants::startHeight / constants::scale - this->currentFrame.h){
     vel.y = -vel.y * constants::friction;
-    newPos.y = constants::startHeight - this->currentFrame.h; 
+    newPos.y = constants::startHeight / constants::scale - this->currentFrame.h; 
   }
 
   pos.x = newPos.x;
