@@ -21,7 +21,7 @@ void FirstApp::run() {
   if (!(IMG_Init(IMG_INIT_PNG)))
     std::cout << "Error Initiating IMGs" << SDL_GetError() << std::endl;
 
-  SDL_Texture *playerTex = engWindow.loadTexture("gfx/bg.png");
+  SDL_Texture *playerTex = engWindow.loadTexture("gfx/player.png");
 
   EngPlayer player = {Vector2f(0,0), playerTex};
 
