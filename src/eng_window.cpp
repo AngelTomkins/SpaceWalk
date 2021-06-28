@@ -19,7 +19,6 @@ void EngWindow::init(int w, int h, std::string name)
 void EngWindow::initWindow() {
   window = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_UNDEFINED,
                                         SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-  
 }
 
 void EngWindow::closeWindow() {

@@ -14,6 +14,7 @@ public:
   Vector2f& getPos(){ return pos; }
 
   SDL_Texture* getTex() { return tex; }
+  void setTex(SDL_Texture* p_tex) { tex = p_tex; return; }
   SDL_Rect getCurrentFrame() {return currentFrame; }
 
 protected:

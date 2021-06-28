@@ -25,7 +25,7 @@ void FirstApp::run() {
   SDL_Texture *bgTex = engWindow.loadTexture("gfx/bg.png");
 
   EngEntity background = {Vector2f(0,0), bgTex};
-  EngPlayer player = {Vector2f(0,0), playerTex};
+  EngPlayer player = {Vector2f(0,0), playerTex, &engWindow};
 
   bool gameRunning = true;
 
