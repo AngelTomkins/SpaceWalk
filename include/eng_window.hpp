@@ -32,6 +32,9 @@ private:
   int WIDTH;
   int HEIGHT;
 
+  int halfWIDTH;
+  int halfHEIGHT;
+
   std::string windowName;
 
   SDL_Window *window;

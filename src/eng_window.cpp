@@ -10,6 +10,9 @@ namespace eng {
 void EngWindow::init() {
   WIDTH = resolution.x;
   HEIGHT = resolution.y;
+  halfWIDTH = WIDTH/2;
+  halfHEIGHT = HEIGHT/2;
+
   windowName = constants::windowName;
 
   initWindow();
@@ -53,31 +56,21 @@ void EngWindow::clear() { SDL_RenderClear(renderer); }
 
 void EngWindow::render(EngEntity &p_entity, EngEntity &p_player) {
   
-  camera.x = p_player.getPos().x - WIDTH/2;
-  camera.y = p_player.getPos().y - HEIGHT/2;
+  camera.x = p_player.getPos().x * constants::scale - halfWIDTH + p_player.getSpriteSize().x;
+  camera.y = p_player.getPos().y * constants::scale - halfHEIGHT + p_player.getSpriteSize().y;
   
   SDL_Rect src;
 
-//   src.x = p_entity.getCurrentFrame().x;
-//   src.y = p_entity.getCurrentFrame().y;
-//   src.w = 32 * p_entity.getCurrentFrame().w;
-//   src.h = 32 * p_entity.getCurrentFrame().h;
   src.x = p_entity.getCurrentFrame().x *  p_entity.getSpriteSize().x;
   src.y = p_entity.getCurrentFrame().y *  p_entity.getSpriteSize().y;
   src.w = p_entity.getSpriteSize().x;
   src.h = p_entity.getSpriteSize().y;
-
-  std::cout << p_entity.getPos().x << "x" << p_entity.getPos().y << " " << camera.x << "x" << camera.y << std::endl;
 
   SDL_Rect dst;
   dst.x = p_entity.getPos().x * constants::scale - camera.x;
   dst.y = p_entity.getPos().y * constants::scale - camera.y;
   dst.w = src.w * constants::scale;
   dst.h = src.h * constants::scale;
-  // dst.x = p_entity.getPos().x * constants::scale;
-  // dst.y = p_entity.getPos().y * constants::scale;
-  // dst.w = src.w * constants::scale;
-  // dst.h = src.h * constants::scale;
 
   SDL_RenderCopy(renderer, p_entity.getTex(), &src, &dst);
 }

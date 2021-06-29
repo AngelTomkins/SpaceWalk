@@ -43,14 +43,15 @@ void EngPlayer::move(Vector2f &direction) {
 }
 void EngPlayer::update() {
 
-
-  // std::cout << nextFrame << " " << sprite.x << std::endl;
-
-
   Vector2f newPos;
   newPos.x = pos.x + (vel.x * constants::accel);
   newPos.y = pos.y + (vel.y * constants::accel);
 
+
+  //TODO add new collision for other bodies, maybe somewhere else? bodies.hpp?
+
+  /*
+  // OLD COLLISION CODE FOR WALLS
 
   if (newPos.x <= 0) {
     vel.x = -vel.x * constants::friction;
@@ -69,6 +70,7 @@ void EngPlayer::update() {
     vel.y = -vel.y * constants::friction;
     newPos.y = resolution.y / constants::scale - spriteSize.y;
   }
+  */
 
   pos.x = newPos.x;
   pos.y = newPos.y;
