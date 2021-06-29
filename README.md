@@ -13,8 +13,10 @@ $ git clone https://github.com/AngelTomkins/SDL2_FirstApp.git
 $ cd SDL2_FirstApp/
 $ make
 ```
+After the code has been compiled, remain within the current directory, and run: './a.out'.
+
 
 ### Windows / MacOS
 To be added in the future
 
-After the code has been compiled, remain within the current directory, and run: './a.out'.
+
