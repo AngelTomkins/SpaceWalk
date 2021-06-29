@@ -19,13 +19,15 @@ public:
 
   void closeWindow();
   void clear();
-  void render(EngEntity& p_entity);
+  void render(EngEntity& p_entity,EngEntity& p_player );
   void display();
 
 
 private:
   void initWindow();
   void initRenderer();
+
+  SDL_Rect camera;
 
   int WIDTH;
   int HEIGHT;

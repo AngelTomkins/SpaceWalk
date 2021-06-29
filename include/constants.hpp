@@ -6,7 +6,7 @@
 
 namespace constants {
 const float gravity {9.81f};
-const float scale {2.0f};
+const float scale {2.f};
 const std::string windowName {"Space Walk"};
 const float accel {0.01f};
 const float friction {0.3f};

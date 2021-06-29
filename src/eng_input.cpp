@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 
-#include "eng_input.hpp"
+#include "../include/eng_input.hpp"
 
 #include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_scancode.h>

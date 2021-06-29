@@ -24,7 +24,6 @@ protected:
   Vector2I sprite {0,0};
   Vector2I spriteSize;
   Vector2f pos;
-  float mass;
   SDL_Rect currentFrame;
   SDL_Texture* tex;
 };

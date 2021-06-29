@@ -1,4 +1,4 @@
-#include "eng_window.hpp"
+#include "../include/eng_window.hpp"
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
 
@@ -20,6 +20,7 @@ void EngWindow::initWindow() {
   window = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_UNDEFINED,
                             SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT,
                             SDL_WINDOW_SHOWN);
+  camera = {0, 0, 1000, 1000};
 }
 
 void EngWindow::closeWindow() { SDL_DestroyWindow(window); }
@@ -50,8 +51,13 @@ int EngWindow::getRefershRate() {
 
 void EngWindow::clear() { SDL_RenderClear(renderer); }
 
-void EngWindow::render(EngEntity &p_entity) {
+void EngWindow::render(EngEntity &p_entity, EngEntity &p_player) {
+  
+  camera.x = p_player.getPos().x - WIDTH/2;
+  camera.y = p_player.getPos().y - HEIGHT/2;
+  
   SDL_Rect src;
+
 //   src.x = p_entity.getCurrentFrame().x;
 //   src.y = p_entity.getCurrentFrame().y;
 //   src.w = 32 * p_entity.getCurrentFrame().w;
@@ -61,11 +67,17 @@ void EngWindow::render(EngEntity &p_entity) {
   src.w = p_entity.getSpriteSize().x;
   src.h = p_entity.getSpriteSize().y;
 
+  std::cout << p_entity.getPos().x << "x" << p_entity.getPos().y << " " << camera.x << "x" << camera.y << std::endl;
+
   SDL_Rect dst;
-  dst.x = p_entity.getPos().x * constants::scale;
-  dst.y = p_entity.getPos().y * constants::scale;
+  dst.x = p_entity.getPos().x * constants::scale - camera.x;
+  dst.y = p_entity.getPos().y * constants::scale - camera.y;
   dst.w = src.w * constants::scale;
   dst.h = src.h * constants::scale;
+  // dst.x = p_entity.getPos().x * constants::scale;
+  // dst.y = p_entity.getPos().y * constants::scale;
+  // dst.w = src.w * constants::scale;
+  // dst.h = src.h * constants::scale;
 
   SDL_RenderCopy(renderer, p_entity.getTex(), &src, &dst);
 }

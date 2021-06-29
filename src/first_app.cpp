@@ -1,4 +1,4 @@
-#include "first_app.hpp"
+#include "../include/first_app.hpp"
 
 #include <SDL2/SDL_video.h>
 #include <iostream>
@@ -63,8 +63,8 @@ void FirstApp::run() {
     player.update();
 
     engWindow.clear();
-    engWindow.render(background);
-    engWindow.render(player);
+    engWindow.render(background, player);
+    engWindow.render(player, player);
 
     engWindow.display();
 
