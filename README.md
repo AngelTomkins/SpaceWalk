@@ -6,10 +6,15 @@ The theme "Free" is going to be shown through the character's ability to fly aro
 
 ## Compilation
 
+
+### Linux
 ```
 $ git clone https://github.com/AngelTomkins/SDL2_FirstApp.git
 $ cd SDL2_FirstApp/
 $ make
 ```
+
+### Windows / MacOS
+To be added in the future
 
 After the code has been compiled, remain within the current directory, and run: './a.out'.
