@@ -1,5 +1,6 @@
 #include "first_app.hpp"
 
+#include <SDL2/SDL_video.h>
 #include <iostream>
 
 namespace eng {
@@ -14,18 +15,18 @@ FirstApp::~FirstApp() {
 }
 
 void FirstApp::run() {
-  engWindow.init(constants::startWidth, constants::startHeight, constants::windowName);
+  engWindow.init();
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     std::cout << "Error Initiating SDL: " << SDL_GetError() << std::endl;
 
   if (!(IMG_Init(IMG_INIT_PNG)))
     std::cout << "Error Initiating IMGs" << SDL_GetError() << std::endl;
 
-  SDL_Texture *playerTex = engWindow.loadTexture("gfx/Player_Idle.png");
+  SDL_Texture *playerTex = engWindow.loadTexture("gfx/Player/Player_Sheet.png");
   SDL_Texture *bgTex = engWindow.loadTexture("gfx/bg.png");
 
-  EngEntity background = {Vector2f(0,0), bgTex};
-  EngPlayer player = {Vector2f(0,0), playerTex, &engWindow};
+  EngEntity background = {Vector2f(0,0), bgTex, Vector2I(1000,1000)};
+  EngPlayer player = {Vector2f(0,0), playerTex, Vector2I(32,32), &engWindow};
 
   bool gameRunning = true;
 
@@ -44,33 +45,24 @@ void FirstApp::run() {
 
       currentTime = newTime;
       accumulator += frameTime;
+      
+      engInput.inputCheck(event);
+      player.move(engInput.getDirection());
 
     while (accumulator >= timeStep) 
     {
 
       while (SDL_PollEvent(&event)) 
       {
-        switch (event.type) 
-        {
-        case SDL_QUIT:
+        if(event.type == SDL_QUIT)
           gameRunning = false;
-          break;
 
-        case SDL_KEYDOWN:
-          engInput.inputCheck(event);
-          player.move(engInput.getDirection());
-          break;
-        }
       }
       accumulator -= timeStep;
     }
     player.update();
-    // const float alpha = accumulator / timeStep;
 
     engWindow.clear();
-    // for (EngEntity &e : entities) {
-    //   engWindow.render(e);
-    // }
     engWindow.render(background);
     engWindow.render(player);
 
@@ -80,6 +72,7 @@ void FirstApp::run() {
 
     if (frameTicks < 1000 / engWindow.getRefershRate())
       SDL_Delay(1000 / engWindow.getRefershRate() - frameTicks);
+
   }
 
   return;

@@ -12,7 +12,7 @@
 namespace eng {
 class EngWindow {
 public:
-  void init(int w, int h, std::string name);
+  void init();
   SDL_Texture* loadTexture(const char* filePath);
 
   int getRefershRate();
@@ -22,13 +22,13 @@ public:
   void render(EngEntity& p_entity);
   void display();
 
+
 private:
   void initWindow();
   void initRenderer();
 
   int WIDTH;
   int HEIGHT;
-
 
   std::string windowName;
 

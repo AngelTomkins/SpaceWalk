@@ -9,7 +9,7 @@ namespace eng {
 class EngInput {
 
 public:
-  char inputCheck(SDL_Event event);
+  void inputCheck(SDL_Event event);
   Vector2f& getDirection() { return direction; }
 
 private:

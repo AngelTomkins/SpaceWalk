@@ -3,71 +3,27 @@
 #include "eng_input.hpp"
 
 #include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_scancode.h>
 #include <iostream>
 
 namespace eng {
 
-char EngInput::inputCheck(SDL_Event event) {
-  char pressed;
+void EngInput::inputCheck(SDL_Event event) {
 
-  if (event.type == SDL_KEYDOWN) {
-    switch (event.key.keysym.sym) {
-    case SDLK_UP:
-    case SDLK_w:
-      direction = {direction.x, -1};
-      pressed = 'W';
-      break;
-    case SDLK_DOWN:
-    case SDLK_s:
-      direction = {direction.x, 1};
-      pressed = 'S';
-      break;
-    case SDLK_LEFT:
-    case SDLK_a:
-      direction = {-1, direction.y};
-      pressed = 'A';
-      break;
-    case SDLK_RIGHT:
-    case SDLK_d:
-      direction = {1, direction.y};
-      pressed = 'D';
-      break;
-    default:
-      direction = {0, 0};
-      pressed = '-';
-      break;
-    }
-
-    if (event.type == SDL_KEYUP) {
-      switch (event.key.keysym.sym) {
-      case SDLK_UP:
-      case SDLK_w:
-        direction = {direction.x, 0};
-        pressed = 'W';
-        break;
-      case SDLK_DOWN:
-      case SDLK_s:
-        direction = {direction.x, 0};
-        pressed = 'S';
-        break;
-      case SDLK_LEFT:
-      case SDLK_a:
-        direction = {0, direction.y};
-        pressed = 'A';
-        break;
-      case SDLK_RIGHT:
-      case SDLK_d:
-        direction = {0, direction.y};
-        pressed = 'D';
-        break;
-      default:
-        direction = {0, 0};
-        pressed = '-';
-        break;
-      }
-    }
+  direction = {0,0};
+  const Uint8 *state = SDL_GetKeyboardState(nullptr);
+  if (state[SDL_SCANCODE_UP] || state[SDL_SCANCODE_W]) {
+    direction = {direction.x, direction.y - 1};
   }
-
-    return pressed;
+  if (state[SDL_SCANCODE_DOWN] || state[SDL_SCANCODE_S]) {
+    direction = {direction.x, direction.y + 1};
   }
+  if (state[SDL_SCANCODE_LEFT] || state[SDL_SCANCODE_A]) {
+    direction = {direction.x - 1, direction.y};
+  }
+  if (state[SDL_SCANCODE_RIGHT] || state[SDL_SCANCODE_D]) {
+    direction = {direction.x + 1, direction.y};
+  }
+  return;
+}
 } // namespace eng
