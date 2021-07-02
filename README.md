@@ -10,7 +10,7 @@ The theme "Free" is going to be shown through the character's ability to fly aro
 ### Linux
 ```
 $ git clone https://github.com/AngelTomkins/SpaceWalk.git
-$ cd SDL2_FirstApp/
+$ cd SpaceWalk/
 $ make
 ```
 After the code has been compiled, remain within the current directory, and run: './a.out'.
