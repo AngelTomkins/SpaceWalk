@@ -4,14 +4,17 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_rect.h>
 
+#include <glm/vec2.hpp>
+
 #include "eng_math.hpp"
 
 namespace eng {
 class EngEntity {
 public:
-  EngEntity(Vector2f p_pos, SDL_Texture* p_tex, Vector2I spriteSize);
+  EngEntity(glm::vec2 p_pos, SDL_Texture* p_tex, Vector2I spriteSize);
 
-  Vector2f& getPos(){ return pos; }
+  glm::vec2& getPos(){ return pos; }
+  void setPos(glm::vec2 p) { pos = p; }
 
   SDL_Texture* getTex() { return tex; }
   void setTex(SDL_Texture* p_tex) { tex = p_tex; return; }
@@ -21,11 +24,11 @@ public:
   Vector2I getSpriteSize() {return spriteSize; }
 
 protected:
+
   Vector2I sprite {0,0};
   Vector2I spriteSize;
-  Vector2f pos;
+  glm::vec2 pos;
   SDL_Rect currentFrame;
   SDL_Texture* tex;
 };
-
 } // namespace eng

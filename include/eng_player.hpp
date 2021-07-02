@@ -1,23 +1,23 @@
 #pragma once
+
 #include "eng_entity.hpp"
 #include "constants.hpp"
 #include "eng_window.hpp"
+#include "eng_body.hpp"
 
 namespace eng {
-class EngPlayer : public EngEntity {
+class EngPlayer : public dynamicBody {
 public:
-  EngPlayer(Vector2f p_pos, SDL_Texture* p_tex, Vector2I p_spriteSize, EngWindow* engWindow);
-  void move(Vector2f &direction);
+  EngPlayer(glm::vec2 p_pos, SDL_Texture* p_tex, Vector2I p_spriteSize, float mass, EngWindow* engWindow);
+  void move(glm::vec2 &direction);
   void update();
+  void interact(char pressed);
 
 private:
-  Vector2f vel;
   EngWindow *engWindow;
 
   void initSprite();
   int nextFrame{0};
   bool isAcceling = false;
-
-  SDL_Texture* textures[8];
 };
 } // namespace eng

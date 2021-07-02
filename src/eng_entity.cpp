@@ -2,7 +2,7 @@
 
 namespace eng {
 
-EngEntity::EngEntity(Vector2f p_pos, SDL_Texture *p_tex, Vector2I p_spriteSize) 
+EngEntity::EngEntity(glm::vec2 p_pos, SDL_Texture *p_tex, Vector2I p_spriteSize) 
   : pos(p_pos), tex(p_tex), spriteSize(p_spriteSize)
 {
     currentFrame.x = 0;

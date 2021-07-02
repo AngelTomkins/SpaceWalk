@@ -3,16 +3,19 @@
 #include <SDL2/SDL.h>
 
 
-#include "eng_math.hpp"
+#include <glm/vec2.hpp>
 
 namespace eng {
 class EngInput {
 
 public:
-  void inputCheck(SDL_Event event);
-  Vector2f& getDirection() { return direction; }
+  void inputCheck();
+  char interactCheck();
+  glm::vec2& getDirection() { return direction; }
+
 
 private:
-  Vector2f direction;
+  glm::vec2 direction;
+  const Uint8 *state = SDL_GetKeyboardState(nullptr);
 };
 } // namespace eng
